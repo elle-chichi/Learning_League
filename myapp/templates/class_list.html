@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Class List</title>
+</head>
+<body>
+    <h1>Class List</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Class</button>
+    </form>
+    <ul>
+        {% for class in classes %}
+            <li>{{ class.name }} - {{ class.description }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
