@@ -1,75 +1,73 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Student, Class, Grade, Attendance, Teacher, Item
-from .forms import StudentForm, ClassForm, GradeForm, AttendanceForm, TeacherForm, ItemForm
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect
+from .forms import ClientForm
+from .models import Client
+
+
 
 # Create your views here.
 
-def home(request):
+def index(request):
     context = {
         'welcome_message': "Welcome to the Learning League!",
     }
-    return render(request, 'home.html')
-def student_list(request):
-    students = Student.objects.all()
-    if request.method == 'POST':
-        form = StudentForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('student_list')
-    else:
-        form = StudentForm()
-    return render(request, 'student_list.html', {'students': students, 'form': form})
+    return render(request, 'index.html')
+def student(request):
+    return render(request, 'student_list.html')
 
-def create_item(request):
-    if request.method == 'POST':
-        form = ItemForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = ItemForm()
-    return render(request, 'create_item.html', {'form': form})
+def contact_us(request):
+    return render(request, 'contact.html')
 
-def class_list(request):
-    classes = Class.objects.all()
-    if request.method == 'POST':
-        form = ClassForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('class_list')
-    else:
-        form = ClassForm()
-    return render(request, 'class_list.html', {'classes': classes, 'form': form})
+def vehicle(request):
+    return render(request, 'vehicle.html')
 
-def grade_list(request):
-    grades = Grade.objects.all()
-    if request.method == 'POST':
-        form = GradeForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('grade_list')
-    else:
-        form = GradeForm()
-    return render(request, 'grade_list.html', {'grades': grades, 'form': form})
-
-def attendance_list(request):
-    attendances = Attendance.objects.all()
-    if request.method == 'POST':
-        form = AttendanceForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('attendance_list')
-    else:
-        form = AttendanceForm()
-    return render(request, 'attendance_list.html', {'attendances': attendances, 'form': form})
 
 def teacher_list(request):
-    teachers = Teacher.objects.all()
+    return render(request, 'teacher_list.html')
+
+# def collect_client_data(request):
+#     return render(request, 'collect_client_data.html')
+
+
+# def contact(request):
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('success')
+#     else:
+#         form = ContactForm()
+#         return render(request, 'contact.html', {'form': form})
+def success(request):
+    return render(request, 'success.html')
+
+# def contact(request):
+#     if request.method == 'POST':
+#         form = ClientForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('success')
+#         else:
+#             print(form.errors)
+#     else:
+#         form = ClientForm()
+#
+#     return render(request, 'contact.html', {'form': form})
+
+
+def client_form(request):
     if request.method == 'POST':
-        form = TeacherForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('teacher_list')
-    else:
-        form = TeacherForm()
-    return render(request, 'teacher_list.html', {'teachers': teachers, 'form': form})
+        # Capture form data from POST request
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        number = request.POST.get('number')
+        message = request.POST.get('message')
+
+        # Create a new Client instance and save the data to the database
+        client = Client(name=name, email=email, number=number, message=message)
+        client.save()
+
+        # Redirect to a success page (or the same page)
+        return redirect('client_form')  # Redirect to the form page after successful submission
+
+    return render(request, 'client_form.html')

@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'theLearningLeague.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'learningleague',
+        'NAME': 'learningleaguee',
         'USER': 'root',
         'PASSWORD': 'Elle2024!',
         'HOST': 'localhost',

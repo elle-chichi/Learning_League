@@ -1,33 +1,28 @@
 from django import forms
-from .models import Student, Class, Grade, Attendance, Teacher, Item
+from .models import Client
 
 
-class StudentForm(forms.ModelForm):
+# class ContactForm(forms.ModelForm):
+#     class Meta:
+#         model = Contact
+#         fields = ['name', 'number', 'email', 'message']
+
+# class ClassForm(forms.ModelForm):
+#     class Meta:
+#         model = Class
+#         fields = ['name', 'description']
+#
+# class TeacherForm(forms.ModelForm):
+#     class Meta:
+#         model = Teacher
+#         fields = ['name', 'subject', 'email']
+#
+# class ItemForm(forms.ModelForm):
+#     class Meta:
+#         model = Item
+#         fields = ['name', 'description']
+#
+class ClientForm(forms.ModelForm):
     class Meta:
-        model = Student
-        fields = ['name', 'age', 'email']
-
-class ClassForm(forms.ModelForm):
-    class Meta:
-        model = Class
-        fields = ['name', 'description']
-
-class GradeForm(forms.ModelForm):
-    class Meta:
-        model = Grade
-        fields = ['student', 'class_enrolled', 'grade']
-
-class AttendanceForm(forms.ModelForm):
-    class Meta:
-        model = Attendance
-        fields = ['student', 'class_attended', 'date', 'present']
-
-class TeacherForm(forms.ModelForm):
-    class Meta:
-        model = Teacher
-        fields = ['name', 'subject', 'email']
-
-class ItemForm(forms.ModelForm):
-    class Meta:
-        model = Item
-        fields = ['name', 'description']
+        model = Client
+        fields = ['name', 'number', 'email', 'message']
